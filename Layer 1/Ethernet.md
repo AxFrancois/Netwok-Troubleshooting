@@ -2,6 +2,8 @@
 
 Ethernet cable is, with WiFi, one of the two most common ways to connect two devices. It's defined by the IEEE standard 802.3 and has been continuously improved over the years. Ethernet cable are the physical connection between two devices, and thus many issues are associated with it.
 
+> 📍 Ethernet cable are often called RJ45 cable. RJ45 (RJ stands for Registered jack) is actually the standard for the connector. Another type of connector cable frequently found is RJ11, that is used for telephone lines.
+
 Frequent issues :
 
 - [Disconnected cable](#disconnected-cable)
@@ -66,7 +68,12 @@ The device might have disconnection issue. The device might have packet loss.
 
 ### Diagnostics
 
-The RJ45 connector is damaged. The cable is damaged.
+The RJ45 connector is damaged or the cable is damaged.
+
+|        Normal         |             Broken             |
+| :-------------------: | :----------------------------: |
+| ![](./Image/RJ45.jpg) | ![](./Image/RJ45%20broken.jpg) |
+
 If the damage is inside the cable, you might have packet loss and reduced speed. Use the command `test cable-diagnostics tdr interface int <interface>` and `show cable-diagnostics tdr interface <interface>` to check the cable.
 
 ```Cisco IOS
@@ -122,6 +129,12 @@ Switch#show interface status
 > ⚠️ `show interface` indicate the speed available on the link and the speed that has been negotiated with the peer or the speed that has been configured on the interface. It doesn't always match the speed of the link. Furthermore, the negotiation process might be disable on the interface.
 
 > ⚠️ A `10 Mbps` or `a-10` can indicate a device in standby mode. Once again, it doesn't always match the speed of the link.
+
+For certain cable manufacturers, the cable category is written on the cable itself.
+
+| Cat5e                  | Cat6                  |
+| ---------------------- | --------------------- |
+| ![](./Image/Cat5e.jpg) | ![](./Image/Cat6.jpg) |
 
 ### Fixing
 
