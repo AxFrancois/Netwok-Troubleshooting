@@ -40,6 +40,7 @@ Frequent issues :
 - [Incorrect IP](#incorrect-ip)
 - [Incorrect gateway](#incorrect-gateway)
 - [Using special IPs](#using-special-ips)
+- [Broadcast storm](#broadcast-storm)
 
 ## IP duplicate
 
@@ -72,6 +73,42 @@ Modify the incorrect IP with the right one or disable the interface that has the
 
 An incorrect mask is also a frequent issue. As explained in the introduction, the mask is used to determine if a host is on the same network as another host. Therefore, if the mask is incorrect, the hosts might fail to communicate with other device on his network.
 
+[//]: <> (TO DO : Test with a GW)
+
+Let's take the folowing example: your network is a star topology composed of 3 PC whose IP are 192.168.1.10/24, 192.168.1.20/24 and 192.168.1.200/25 and a L2 switch. PC1 and 2 are correctly configured and can both communicate. But what happens if PC1 want to reach PC3 ? PC1 uses his mask and PC3's IP to determine if they are both on the same network : 192.168.1.200/24 -> 192.168.1.0, it's the same network ID as PC1 so PC1 can reach PC3 directly. For PC3 however, PC3 uses his mask and PC1's IP to determine if they are on the same network : 192.168.1.10/25 -> 192.168.1.0, but PC3's network ID is 192.168.1.128. For PC3, PC1 isn't in the same network, so PC3 can't reach PC1 directly and need a gateway.
+
+![](./Ressources/SVG/ipv4-incorrectmask.svg)
+
 ### Symptoms
 
 The device that has the incorrect mask will not be able to communicate with all the other devices on the network.
+
+### Diagnosis
+
+Login on the suspected device and check network configuration.
+
+On Windows, you can use the command `ipconfig` or `netsh interface ipv4 show config`.
+
+```Bash
+C:\Users\MyUser>ipconfig
+
+Windows IP Configuration
+
+
+Ethernet adapter Ethernet0:
+
+   Connection-specific DNS Suffix  . : xxx.xx
+   Link-local IPv6 Address . . . . . : fe80::1%5
+   IPv4 Address. . . . . . . . . . . : 192.168.1.200
+   Subnet Mask . . . . . . . . . . . : 255.255.255.128
+   Default Gateway . . . . . . . . . : 192.168.1.254
+
+```
+
+[//]: <> (Linux)
+On Linux you can use the command `ip a`.
+
+```Shell
+$ ip a
+
+```
