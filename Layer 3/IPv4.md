@@ -16,7 +16,19 @@ IP addresses are logical addresses that identify a host on a network. They are c
 | 255.252.0.0          | 14               |
 | 255.254.0.0          | 15               |
 | 255.255.0.0          | 16               |
-| ...                  | ...              |
+| 255.255.128.0        | 17               |
+| 255.255.192.0        | 18               |
+| 255.255.224.0        | 19               |
+| 255.255.240.0        | 20               |
+| 255.255.248.0        | 21               |
+| 255.255.252.0        | 22               |
+| 255.255.254.0        | 23               |
+| 255.255.255.0        | 24               |
+| 255.255.255.128      | 25               |
+| 255.255.255.192      | 26               |
+| 255.255.255.224      | 27               |
+| 255.255.255.240      | 28               |
+| 255.255.255.248      | 29               |
 | 255.255.255.252      | 30               |
 
 The final representation of an IP is `{address}/{mask in decimal}` : `192.168.1.1/24`, or `{address} {mask in decimal separator by dot}` : `192.168.1.1 255.255.255.0`.
@@ -31,7 +43,7 @@ The mask is used to determine if a host is on the same network as another host. 
 
 The result is the same as the address, so they are in the same network. If not they are in different networks.
 
-The mask determines the number of hosts that can be connected to the network. For example, if the mask is 30, there is 2<sup>(32-30)</sup> = 2<sup>2</sup> = 4 IP in the network. However, the first IP is the network ID (the result after the logical &), and the last is for broadcast. So the number available IP for the hosts is 2<sup>(32-30)</sup>-2 = 2<sup>2</sup>-2 = 2. As a general rule, the number of available IP is **2<sup>(32-mask)</sup>-2**. For exemple for a /24 network, there is 2<sup>(32-24)-2\*\* = 2<sup>8</sup>-2 = 254 IP available for the hosts.
+The mask determines the number of hosts that can be connected to the network. For example, if the mask is 30, there is 2<sup>(32-30)</sup> = 2<sup>2</sup> = 4 IP in the network. However, the first IP is the network ID (the result after the logical &), and the last is for broadcast. So the number available IP for the hosts is 2<sup>(32-30)</sup>-2 = 2<sup>2</sup>-2 = 2. As a general rule, the number of available IP is **2<sup>(32-mask)</sup>-2**. For exemple for a /24 network, there is 2<sup>(32-24)</sup>-2 = 2<sup>8</sup>-2 = 254 IP available for the hosts.
 
 Frequent issues :
 
