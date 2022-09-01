@@ -62,6 +62,8 @@ See your network as a city and the IP as the address of a building. If you want 
 
 Duplicate IPs are a frequent issue in networks and can sometimes be a bit difficult to identify.
 
+> ⚠️ Duplicate IP can still happen even if you use DHCP. In order to verify if an IP is already used, a DHCP server uses [ICMP](ICMP.md) ping request. If something blocks the ping request, for example an [ACL](../Layer%204/ACL.md) or a [Firewall](../Layer%204/Firewall.md), the DHCP server gets no anwer and the IP is considered as unused
+
 ### Symptoms
 
 All layer 3+ protocols are highly unstable. Frequent diconnections and packet loss. [ARP](ARP.md) request are sent continuously and the network is not stable.
@@ -124,3 +126,49 @@ On Linux you can use the command `ip a`.
 $ ip a
 
 ```
+
+### Fixing
+
+Change the mask
+
+## Incorrect IP
+
+[//]: <> (To complete)
+
+## Incorrect gateway
+
+[//]: <> (To complete)
+
+## Using special IPs
+
+[//]: <> (To complete)
+
+There are multiples range of IPs that are reserved for special purposes.
+
+| IP subnet      | Usage                     |
+| -------------- | ------------------------- |
+| 10.0.0.0/8     | Private network           |
+| 172.16.0.0/12  | Private network           |
+| 192.168.0.0/16 | Private network           |
+| 127.0.0.0/8    | Loopback network          |
+| 169.254.0.0/16 | Autoconfiguration network |
+| 224.0.0.0/4    | Multicast network         |
+| 100.64.0.0/10  | Shared address space      |
+
+First of all, there are the 3 privates IP ranges. These ranges are used for private networks and are not routable on the internet. Theses range are used on your home internet connection, in your company or in your school. You can use any IP in these ranges freely, but you can't access the internet with them.
+
+Then there is the loopback network. This network is used to test the network configuration. It's a network that is only accessible from the device itself. There are used for services that are localy hosted on the device. The loopback network is also used to test that your network interface card is working properly.
+
+The autoconfiguration network is used by [DHCP](DHCP.md) to assign an IP to a device. If a device can't get an IP from a DHCP server, it will use this range to assign an IP to itself. This IP is not routable on the internet. If you see an IP in this range, it means that you have a DHCP connectivity issue.
+
+The multicast network is used for multicast communication. Multicast is a communication method that allows a device to send a message to multiple devices at the same time. This network is used for video streaming, video conferencing, etc. These IP can't be used to address devices.
+
+The shared address space is used for carrier-grade NAT. Carrier-grade NAT is a NAT method that allows a device to have multiple public IP. This is used by big companies that have a lot of devices that need to be accessible from the internet. This IP can't be used to address devices.
+
+Any IP that are not in these ranges are called public IP. Public IP are sold by the IANA (Internet Assigned Numbers Authority) and are used to address devices on the internet. You can't use any IP in these ranges freely, you need to buy them from the IANA. Even if you technically can use any IP in these ranges in your private network with [NAT](./NAT.md), it's not recommended as this will prevent you to communicate with the public server that already use these IP and it's complete bad practice. You should only use the private IP ranges in your private network. Note that the public IP pool is exhausted and that you can't really buy any IP anymore, and we should move to IPv6.
+
+### Symptoms
+
+## Documentation
+
+- http://www.iana.org/help/abuse-answers

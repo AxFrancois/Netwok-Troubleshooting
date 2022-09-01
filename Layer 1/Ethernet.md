@@ -13,6 +13,7 @@ Frequent issues :
 - [Straight through and crossover cable](#straight-through-and-crossover-cable)
 - [Inproper duplex mode](#inproper-duplex-mode)
 - [Incorrect speed](#incorrect-speed)
+- [Incorrect MTU size](#incorrect-mtu-size)
 
 ## Disconnected cable
 
