@@ -12,7 +12,7 @@ Frequent issues :
 
 [//]: <> (To confirm)
 
-In a layer 2 segment, each device must have a unique MAC address. The probability of a device having the same MAC address is very low (1/2^48 = 1 in 281 trillion), so this issue should never happen, right ? Right ? Well actually it can happen, and it's when I'm working with virtual machines. When you carelessly clone a virtual machine, the MAC address is the same as the original one.
+In a layer 2 segment, each device must have a unique MAC address. The probability of 2 devices having the same MAC address is very low (1/2^48 = 1 in 281 trillion), so this issue should never happen, right ? RIGHT ? Well actually it happenned, and it's when I was working with virtual machines. When you carelessly clone a virtual machine, the MAC address is the same as the original one.
 
 ### Symtoms
 
