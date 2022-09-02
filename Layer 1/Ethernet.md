@@ -71,9 +71,9 @@ The device might have disconnection issue. The device might have packet loss.
 
 The RJ45 connector is damaged or the cable is damaged.
 
-|        Normal         |             Broken             |
-| :-------------------: | :----------------------------: |
-| ![](./Image/RJ45.jpg) | ![](./Image/RJ45%20broken.jpg) |
+|              Normal               |                   Broken                   |
+| :-------------------------------: | :----------------------------------------: |
+| ![](./Ressources/Images/RJ45.jpg) | ![](./Ressources/Images/RJ45%20broken.jpg) |
 
 If the damage is inside the cable, you might have packet loss and reduced speed. Use the command `test cable-diagnostics tdr interface int <interface>` and `show cable-diagnostics tdr interface <interface>` to check the cable.
 
@@ -133,9 +133,9 @@ Switch#show interface status
 
 For certain cable manufacturers, the cable category is written on the cable itself.
 
-| Cat5e                  | Cat6                  |
-| ---------------------- | --------------------- |
-| ![](./Image/Cat5e.jpg) | ![](./Image/Cat6.jpg) |
+| Cat5e                              | Cat6                              |
+| ---------------------------------- | --------------------------------- |
+| ![](./Ressources/Images/Cat5e.jpg) | ![](./Ressources/Images/Cat6.jpg) |
 
 ### Fixing
 
@@ -152,7 +152,7 @@ There is 2 kind of ethernet cables :
 
 Straight through cable have the same end on both sides (T568A or T568B). Crossover cable have different ends on both sides (T568A and T568B).
 
-![](Image/T568.png)
+![](./Ressources/Images/T568.png)
 
 Straight through cable are the most common cable type. They are used to connect 2 device that are not similar (Ex : PC and router). Crossover cable are used to connect 2 device that are similar (Ex : PC and PC, switch and switch). On modern NIC (Network Interface Card), there is a functionnality called Auto-MDIX (automatic medium-dependent interface crossover) that automatically adapt the NIC to the cable. Note that one interface with Auto-MDIX is enough to make the link up with any cable.
 

@@ -93,7 +93,7 @@ An incorrect mask is also a frequent issue. As explained in the introduction, th
 
 Let's take the folowing example : your network is a star topology composed of 3 PC whose IP are 192.168.1.10/24, 192.168.1.20/24 and 192.168.1.200/25 and a L2 switch. PC1 and 2 are correctly configured and can both communicate. But what happens if PC1 want to reach PC3 ? PC1 uses his mask and PC3's IP to determine if they are both on the same network : 192.168.1.200/24 -> 192.168.1.0, it's the same network ID as PC1 so PC1 can reach PC3 directly. For PC3 however, PC3 uses his mask and PC1's IP to determine if they are on the same network : 192.168.1.10/25 -> 192.168.1.0, but PC3's network ID is 192.168.1.128. For PC3, PC1 isn't in the same network, so PC3 can't reach PC1 directly and need a gateway.
 
-![](./Ressources/SVG/ipv4-incorrectmask-1.svg)
+![](./Ressources/Images/ipv4-incorrectmask-1.svg)
 
 #### Example 2
 
@@ -103,7 +103,7 @@ Let's take the folowing example : your network is a star topology composed of 3 
 
 Let's take a look to another example, based on a real life case I had. The network is composed of a Firewall, a L2 switch and 2 servers, configured as follow :
 
-![](./Ressources/SVG/ipv4-incorrectmask-2.svg)
+![](./Ressources/Images/ipv4-incorrectmask-2.svg)
 
 As you might see, this infrastructure is already fucked-up. The dealbreaker is that the firewall, that is working at the session layer, was configured to log only when the sessions ends. So what happens when Server 1 want to reach Server 2 ? Server 1 calculate that Server 2 isn't in the same network and send the packet to his gateway (A) that is the firewall. The firewall log the packet and sent it to Server 2 (B). Then when Server 2 receive the packet, it calculate that Server 1 **IS** in the same network and send it to Server 1 (C) directly, not passing by the firewall. The firewall is then completely confuse and think that the session never established, he then proceed to block Server 1 and Server 2 from communicating (D). The tricky part is that we spent a lot of time trying to figure out why the firewall is doing this, until we saw that packet where only going one way trough the firewall. Note that using [VLAN](../Layer%202/VLAN.md) could also help to solve this issue.
 
