@@ -4,8 +4,8 @@ Frequent issues :
 
 - [VLAN mismatch](#vlan-mismatch)
 - [VLAN trunk instead of access](#Trunk-and-Access)
-- [ip helper address missconfiguration](#ip-helper)
 - [Native VLAN error](#Native-VLAN)
+- [VLAN mismatch on trunk](#VLAN-mismatch-on-trunk)
 
 ## VLAN mismatch
 
@@ -189,13 +189,113 @@ There is actually many ways to fix this issues, depending on what you want to ob
   Switch(config-if)#switchport trunk allowed vlan 2
   ```
 
-## IP helper
-
-[//]: <> (To do)
-
 ## Native VLAN
 
 [//]: <> (To do)
+
+The native VLAN is the VLAN that doesn't have a vlan tag on the frame (in the normal behavior). It is used to send untagged frame between 2 switches. It is also used to send untagged frame to a device that doesn't support VLAN. By default, the native VLAN is VLAN 1. This allow for some "weird" configuration like so :
+
+                                                                Switch1              +-----------------+            Switch2
+                                                            VLAN : 1 (native), 2, 3                       VLAN : 2, 3, 100 (native)
+
+But this might be not what you wanted to do.
+
+### Symtoms
+
+If we take our previous example, theoretically everything should work and you would not notice anything. Hopefully, the CDP (Cisco Discovery Protocol) will help you to find the issue by sending you an alert.
+
+```Cisco IOS
+%CDP-4-NATIVE_VLAN_MISMATCH: Native VLAN mismatch discovered on FastEthernet0/1 (1), with Switch FastEthernet0/1 (100).
+```
+
+But because CDP is a proprietary protocol, you might not have it on your network. In this case, another protocol might warn you, the STP (Spanning Tree Protocol). The STP will detect that the native VLAN is different on the 2 switches and will block the port.
+
+```Cisco IOS
+%SPANTREE-2-RECV_PVID_ERR: Received BPDU with inconsistent peer vlan id 100 on FastEthernet0/1 VLAN1.
+
+%SPANTREE-2-BLOCK_PVID_LOCAL: Blocking FastEthernet0/1 on VLAN0001. Inconsistent local vlan.
+```
+
+However, if for some reason, you don't have CDP or STP, you will not notice anything. The only way to know is to check the configuration of the switch.
+
+### Diagnostics
+
+You can use the command `show interface <interface> switchport` to get more information about the configuration of the interface.
+
+```Cisco IOS
+Switch1#sh int fa0/1 switchport
+Name: Fa0/1
+Switchport: Enabled
+Administrative Mode: trunk
+Operational Mode: trunk
+Administrative Trunking Encapsulation: dot1q
+Operational Trunking Encapsulation: dot1q
+Negotiation of Trunking: On
+Access Mode VLAN: 1 (default)
+Trunking Native Mode VLAN: 1 (default)      <--- Native VLAN is 1
+Voice VLAN: none
+Administrative private-vlan host-association: none
+Administrative private-vlan mapping: none
+Administrative private-vlan trunk native VLAN: none
+Administrative private-vlan trunk encapsulation: dot1q
+Administrative private-vlan trunk normal VLANs: none
+Administrative private-vlan trunk private VLANs: none
+Operational private-vlan: none
+Trunking VLANs Enabled: 1-1001
+Pruning VLANs Enabled: 2-1001
+Capture Mode Disabled
+Capture VLANs Allowed: ALL
+Protected: false
+Unknown unicast blocked: disabled
+Unknown multicast blocked: disabled
+Appliance trust: none
+
+Switch2#sh int fa0/1 switchport
+Name: Fa0/1
+Switchport: Enabled
+Administrative Mode: trunk
+Operational Mode: trunk
+Administrative Trunking Encapsulation: dot1q
+Operational Trunking Encapsulation: dot1q
+Negotiation of Trunking: On
+Access Mode VLAN: 1 (default)
+Trunking Native Mode VLAN: 100 (VLAN100)    <--- Native VLAN is 100
+Voice VLAN: none
+Administrative private-vlan host-association: none
+Administrative private-vlan mapping: none
+Administrative private-vlan trunk native VLAN: none
+Administrative private-vlan trunk encapsulation: dot1q
+Administrative private-vlan trunk normal VLANs: none
+Administrative private-vlan trunk private VLANs: none
+Operational private-vlan: none
+Trunking VLANs Enabled: 2-1005
+Pruning VLANs Enabled: 2-1001
+Capture Mode Disabled
+Capture VLANs Allowed: ALL
+Protected: false
+Unknown unicast blocked: disabled
+Unknown multicast blocked: disabled
+Appliance trust: none
+```
+
+### Fixing
+
+One again, it depends on what you want to obtain. If you change the native VLAN so they both matches (for exemple here 100), you can use `switchport trunk native vlan <vlan-id>`
+
+```Cisco IOS
+Switch1#conf t
+Switch1(config)#interface FastEthernet0/1
+Switch1(config-if)#switchport trunk native vlan 100
+```
+
+On the other hand if you want to keep the config displayed as an exemple, you can disable STP and CDP on the interface.
+
+```Cisco IOS
+Switch1#conf t
+Switch1(config)#interface FastEthernet0/1
+Switch1(config-if)#no spanning-tree portfast
+Switch1(config-if)#no cdp enable
+```
 
 ## Documenation
 
@@ -203,3 +303,7 @@ There is actually many ways to fix this issues, depending on what you want to ob
 
 - [Cisco IOS LAN Switching Command Reference VLAN](https://www.cisco.com/c/en/us/td/docs/ios/lanswitch/command/reference/lsw_book/lsw_s2.html)
 - [Tagging the Native VLAN](https://www.networkworld.com/article/2234512/cisco-subnet-tagging-the-native-vlan.html)
+
+```
+
+```
