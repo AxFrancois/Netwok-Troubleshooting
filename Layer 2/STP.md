@@ -1,7 +1,5 @@
 # Spanning Tree Protocol
 
-<style>body {text-align: justify}</style>
-
 The Spanning Tree Protocol (STP) is a protocol used to prevent loops in a network. It's a layer 2 protocol, and it allow network topology with redundancy to work properly. Loops are very bad for a network, because it can cause a broadcast storm, wich can lead to an denial of service.
 
 The STP is a fairly complex protocol, that can adapt to any network topology and take into account bandwidth and constant updates. It works as follow :

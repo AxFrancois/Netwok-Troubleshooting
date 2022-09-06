@@ -9,8 +9,6 @@ Frequent issues :
 
 ## VLAN mismatch
 
-<style>body {text-align: justify}</style>
-
 [//]: <> (Done)
 
 A very common issue is that the VLANs are not configured correctly. Be always sure both switches have the same VLANs affected to a connected interface.

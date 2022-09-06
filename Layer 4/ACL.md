@@ -1,7 +1,5 @@
 # Access Control List
 
-<style>body {text-align: justify}</style>
-
 ACL are used to control the access to the network. They are used to restrict or allow the access to the network to certain devices, protocols, and MAC and IP addresses (traffic filtering) but also to implement routing policies (Policy Based Routing), to categorize the traffic (classification) and even to debug traffic based on ACL. ACLs and firewalls are two different concepts but can sometimes be used interchangeably. The main difference is that firewalls are used to inspect sessions and can analyse up to layer 7 (application layer) whereas ACLs are used to inspect layer 4 (transport layer). Firewalls can also be used for intrusion detection and prevention (IDS). Also ACL can be deployed on switches and routers, whereas firewalls are specific hardware and software. Even if ACL are now less and less used to the detriment of firewalls and security groups, they can still be useful in some cases.
 
 Frequent issues :

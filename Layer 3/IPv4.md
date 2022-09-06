@@ -1,7 +1,5 @@
 # Internet Protocol
 
-<style>body {text-align: justify}</style>
-
 IP addresses are logical addresses that identify a host on a network. They are composed of 2 main parts:
 
 - the address (encoded over 4 bytes). It is represented as 4 decimal numbers separated by dots, for example: 192.168.1.1.

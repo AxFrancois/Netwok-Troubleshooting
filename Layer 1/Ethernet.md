@@ -1,7 +1,5 @@
 # Ethernet Cable
 
-<style>body {text-align: justify}</style>
-
 Ethernet cable is, with WiFi, one of the two most common ways to connect two devices. It's defined by the IEEE standard 802.3 and has been continuously improved over the years. Ethernet cable are the physical connection between two devices, and thus many issues are associated with it.
 
 > 📍 Ethernet cables are often called RJ45 cables. RJ45 (RJ stands for Registered jack) is actually the standard for the connector. Another type of connector cable frequently found is RJ11, that is used for telephone lines.

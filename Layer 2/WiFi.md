@@ -1,7 +1,5 @@
 # WiFi
 
-<style>body {text-align: justify}</style>
-
 Wifi is a technology both in layer 1 and layer 2. It is used to connect devices to a network without the need of a cable. It is a wireless technology that uses radio waves to transmit data. It is a very popular technology because it is easy to use and it is very fast. It is also very common to find wifi in public places like airports, hotels, restaurants, etc.
 
 Frequent issues :
