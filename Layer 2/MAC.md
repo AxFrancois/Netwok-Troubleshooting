@@ -6,7 +6,9 @@ Each constructor have a range of allowed MAC addresses, usually the 24th first b
 
 Frequent issues :
 
-- [MAC Duplication](##MAC-Duplication)
+- [MAC Duplication](#mac-duplication)
+- [MAC Caching issue](#mac-caching-issue)
+- [Specials MAC addresses](#specials-mac-addresses)
 
 ## MAC Duplication
 
@@ -25,3 +27,7 @@ Switch#show mac address-table
 ```
 
 ### Fixing
+
+## Specials MAC addresses
+
+https://www.iana.org/assignments/ethernet-numbers/ethernet-numbers.xhtml

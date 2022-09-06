@@ -175,7 +175,7 @@ Then there is the loopback network. This network is used to test the network con
 
 The autoconfiguration network is used by [DHCP](DHCP.md) to assign an IP to a device. If a device can't get an IP from a DHCP server, it will use this range to assign an IP to itself. This IP is not routable on the internet. If you see an IP in this range, it means that you have a DHCP connectivity issue.
 
-The multicast network is used for multicast communication. Multicast is a communication method that allows a device to send a message to multiple devices at the same time. This network is used for video streaming, video conferencing, etc. These IP can't be used to address devices.
+The multicast network is used for multicast communication. Multicast is a communication method that allows a device to send a message to multiple devices at the same time. This network is used for video streaming, video conferencing, etc. These IP can't be used to address devices. Take a look at the documentation for multicast address for more information.
 
 The shared address space is used for carrier-grade NAT. Carrier-grade NAT is a NAT method that allows a device to have multiple public IP. This is used by big companies that have a lot of devices that need to be accessible from the internet. This IP can't be used to address devices.
 
@@ -188,3 +188,5 @@ You might say that there is no chance someone ever incorrectly uses one of these
 ## Documentation
 
 - http://www.iana.org/help/abuse-answers
+- Details about multicast addresses : https://www.rfc-editor.org/rfc/rfc3171
+- https://en.wikipedia.org/wiki/Multicast_address
