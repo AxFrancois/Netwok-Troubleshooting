@@ -1,8 +1,6 @@
 ```Markdown
 # Title
 
-<style>body {text-align: justify}</style>
-
 Intro
 
 Frequent issues :
