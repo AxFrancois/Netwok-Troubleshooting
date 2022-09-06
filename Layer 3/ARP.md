@@ -1,5 +1,7 @@
 # Address Resolution Protocol
 
+<style>body {text-align: justify}</style>
+
 ARP, wich stand for Address Resolution Protocol, is a protocol used to resolve the MAC address of a device from its IP address. It's a layer 3 protocol, but it's used in layer 2 communication.
 
 It works by sending a layer 2 broadcast message to the network (destination MAC address FF:FF:FF:FF:FF:FF), asking for the MAC address of a specific IP address. The device with the IP address will respond with its MAC address to the source.
