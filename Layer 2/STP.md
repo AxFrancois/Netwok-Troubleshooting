@@ -11,7 +11,7 @@ The STP is a fairly complex protocol, that can adapt to any network topology and
 2. **Calculating Port Cost** <br>
    Each switch calculate the cost of each port, based on the bandwidth of the port. The cost is calculated using the formula : `Cost = 20 Tbps / Bandwidth`. For example, if the bandwidth of a port is 100Mbps, the cost will be `20 Tbps / 100 Mbps = 200000`. Port cost can also be set manually.
 
-> 📍 This formula is actually true for RSTP (Rapid Spanning Tree Protocol) that was created in 2011 to improve the original STP. The original STP use the formula `Cost = 1 Gbps / Bandwidth`
+> 📍 This formula is actually true for RSTP (Rapid Spanning Tree Protocol) that was created in 2011 to improve the original STP. The original STP use the formula `Cost = 1 Gbps / Bandwidth`.
 
 3. **Calculating Path Cost** <br>
    The root switch send a BPDUs to all its neighbors with a path cost of 0. Upon receiving it, the non-root switch add the cost value from the port it received the BPDU to the path cost value. 2 cases can now happen :
@@ -35,6 +35,8 @@ The STP is a fairly complex protocol, that can adapt to any network topology and
    - S7 receive q first BPDU from S5. He receive a second one from S6, and he is better than the one he got from S5, so he block the link S5-S7. He then receive another one from S5-S7, but the cost is higher so he drop it.
 
    ![](./Ressources/Images/stp-intro-2.svg)
+
+> 📍 Note that S5 isn't connected to the root bridge (S1) by the shortest path, but it's the best path for the network in term of cost.
 
 ## Documentation
 
