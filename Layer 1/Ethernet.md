@@ -71,9 +71,9 @@ The device might have disconnection issue. The device might have packet loss.
 
 The RJ45 connector is damaged or the cable is damaged.
 
-|              Normal               |                   Broken                   |
-| :-------------------------------: | :----------------------------------------: |
-| ![](./Ressources/Images/RJ45.jpg) | ![](./Ressources/Images/RJ45%20broken.jpg) |
+|              Normal               |                                         Broken                                         |
+| :-------------------------------: | :------------------------------------------------------------------------------------: |
+| ![](./Ressources/Images/RJ45.jpg) | ![](./Ressources/Images/RJ45%20broken.jpg) ![](./Ressources/Images/Cable%20broken.jpg) |
 
 If the damage is inside the cable, you might have packet loss and reduced speed. Use the command `test cable-diagnostics tdr interface int <interface>` and `show cable-diagnostics tdr interface <interface>` to check the cable.
 

@@ -87,3 +87,7 @@ $ ip neighbor flush all
 ## ARP for duplicate IP
 
 [//]: <> (To do)
+
+## Documentation
+
+- https://netref.soe.ucsc.edu/node/20
