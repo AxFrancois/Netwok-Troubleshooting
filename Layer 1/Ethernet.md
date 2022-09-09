@@ -78,18 +78,37 @@ The RJ45 connector is damaged or the cable is damaged.
 If the damage is inside the cable, you might have packet loss and reduced speed. Use the command `test cable-diagnostics tdr interface int <interface>` and `show cable-diagnostics tdr interface <interface>` to check the cable.
 
 ```Cisco IOS
-Switch#test cable-diagnostics tdr interface int gi0/1
-Switch#show cable-diagnostics tdr interface gigabitEthernet 0/1
-TDR test last run on: February 25 11:18:31
-Interface Speed Pair Cable length        Distance to fault   Channel Pair status
---------- ----- ---- ------------------- ------------------- ------- ------------
-Gi0/1     1000  1-2  1    +/- 6  m       N/A                 Pair B  Normal
-                3-4  1    +/- 6  m       N/A                 Pair A  Normal
-                5-6  1    +/- 6  m       N/A                 Pair C  Normal
-                7-8  1    +/- 6  m       N/A                 Pair D  Normal
+Switch#!Healthy cable
+Switch#test cable-diagnostics tdr interface int gi1/0/1
+TDR test started on interface Gi1/0/1
+A TDR test can take a few seconds to run on an interface
+Use 'show cable-diagnostics tdr' to read the TDR results.
+Switch#show cable-diagnostics tdr interface gi1/0/1
+TDR test last run on: September 09 16:41:12
+Interface   Speed Local pair Pair length        Remote pair Pair status
+---------   ----- ---------- ------------------ ----------- --------------------
+Gi5/0/5     auto  Pair A     0    +/- 6  meters N/A         Normal
+                  Pair B     0    +/- 6  meters N/A         Normal
+                  Pair C     68   +/- 6  meters N/A         Normal
+                  Pair D     69   +/- 6  meters N/A         Normal
+
+Switch#!Damaged cable
+Switch#test cable-diagnostics tdr int g5/0/5
+TDR test started on interface Gi5/0/5
+A TDR test can take a few seconds to run on an interface
+Use 'show cable-diagnostics tdr' to read the TDR results.
+Switch#show cable-diagnostics tdr interface Gi5/0/5
+TDR test last run on: September 09 16:43:31
+
+Interface   Speed Local pair Pair length        Remote pair Pair status
+---------   ----- ---------- ------------------ ----------- --------------------
+Gi5/0/5     auto  Pair A     0    +/- 1  meters N/A         Normal
+                  Pair B     0    +/- 1  meters N/A         Normal
+                  Pair C     68   +/- 1  meters N/A         Short
+                  Pair D     69   +/- 1  meters N/A         Open
 ```
 
-For more information on this feature please refer to the [Documentation](#documentation) section.
+As you can see on the faulty cable, the cable is damaged on the pair C and D. The pair C have a shot-circuit, and the pair D is open (cut). For more information on this feature please refer to the [Documentation](#documentation) section.
 
 ### Fixing
 
